@@ -276,7 +276,6 @@ function AddArticle({ close, articleInfo, pageType }: Prop) {
                 disabled={pageType === "view"}
                 value={content}
                 placeholder="请输入文章内容"
-                lineNum={false}
                 toolbar={pageType === "view" ? detailToolBar : toolbar}
                 onChange={(e: string) => setContent(e)}
               />
