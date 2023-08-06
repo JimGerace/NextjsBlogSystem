@@ -1,0 +1,16 @@
+export const publicKey: string = `-----BEGIN PUBLIC KEY-----
+MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKW3V1N8eDuHRM17vf6qzpNILQYOUoDk
+RH5cWzLKijzqh5mxno5VI9Ua3pkqL8Sx29W8hQRupmCsHFFF5oOqyysCAwEAAQ==
+-----END PUBLIC KEY-----`;
+
+export const privateKey: string = `-----BEGIN RSA PRIVATE KEY-----
+MIIBOgIBAAJBAKW3V1N8eDuHRM17vf6qzpNILQYOUoDkRH5cWzLKijzqh5mxno5V
+I9Ua3pkqL8Sx29W8hQRupmCsHFFF5oOqyysCAwEAAQJAQB4Q9qdpKbcrwsmG+JsD
+9G5vpTEzcNVhPvbi/mLpW6nODbUcdXmruVW2OoMGcpeP6bM03hvhc1Ux+IdYaCda
+UQIhAOliUr5ZlsG4jv6fk2AqdU/DXOiIpiORpabXjmFuMFuJAiEAtcZYmsf64B4W
+Lp6FqyuljH4/CVA7fJuSArBKr/x0ABMCIQDloXOujPGzrAcuaw6T6VLB54Rr28A0
+cSMfVSpnnQaBmQIgbp1hw+bYAtQsOXhb7TrlRiZ5I6jAWmatJpezC3779CMCIB64
+N2fWgjmJiKjElg7AhlL5U3PRbQ39rEGE8SADDEnR
+-----END RSA PRIVATE KEY-----`;
+
+export const tokenKey = `JimGerace_1006`;

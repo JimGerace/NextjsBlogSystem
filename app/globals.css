@@ -1,0 +1,75 @@
+html,
+body,
+div,
+span,
+i,
+b,
+strong,
+p,
+input,
+image,
+img,
+a,
+button,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow: hidden;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  font-family: math;
+}
+
+a,
+ul {
+  color: #333 !important;
+  list-style: none;
+  text-decoration: none;
+}
+
+image,
+img {
+  image-rendering: crisp-edges;
+}
+
+.ant-layout-sider-trigger {
+  border-right: 1px solid #ddd;
+}
+
+.animation[animation="0"] {
+  animation: none;
+}
+.animation[animation="1"] {
+  animation: left 0.5s;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background-color: #ccc;
+}
+
+@keyframes left {
+  0% {
+    transform: translateX(100px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}

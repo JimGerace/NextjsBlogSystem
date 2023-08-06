@@ -1,0 +1,33 @@
+.header_box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 60px;
+  padding: 0 24px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+
+  .header_left {
+    display: flex;
+    align-items: center;
+
+    .route_item {
+      display: inline-block;
+      color: #333333;
+      font-size: 14px;
+      margin-left: 12px;
+      padding: 0 3px 3px;
+      border-bottom: 1px solid #1890ff;
+    }
+  }
+
+  .header_right {
+    display: flex;
+    align-items: center;
+
+    .icon_user {
+      margin-right: 12px;
+    }
+  }
+}

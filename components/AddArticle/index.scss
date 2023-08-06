@@ -1,0 +1,53 @@
+.add_article_box {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  background-color: #fff;
+  animation: left 0.3s;
+
+  .title_box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #ddd;
+
+    .title_ {
+      font-size: 18px;
+    }
+
+    .btn_box {
+      display: flex;
+      align-items: center;
+
+      .btn_close {
+        margin-left: 12px;
+      }
+    }
+  }
+
+  .form_box {
+    margin-top: 24px;
+  }
+
+  .previewImg {
+    display: flex;
+    align-items: center;
+
+    .btn_view {
+      margin-left: 24px;
+    }
+  }
+}
+
+@keyframes left {
+  0% {
+    transform: translateX(100px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}

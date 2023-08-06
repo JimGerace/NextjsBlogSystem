@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model ArticleSort{
+  id Int @id @default(autoincrement())
+  name String
+  createAt DateTime @default(now()) @map(name: "create_at")
+  updateAt DateTime @default(now()) @map(name: "update_at")
+  @@map(name: "article_sort")
+}
+
+model ArticleList{
+  id String @id @default(cuid())
+  name String
+  coverUrl String @map(name: "cover_url")
+  sort String
+  status Boolean @default(true)
+  createAt DateTime @default(now()) @map(name: "create_at")
+  updateAt DateTime @default(now()) @map(name: "update_at")
+  content String @db.Text
+  @@map(name: "article_list")
+}
+
+model User{
+  id String @id @default(cuid())
+  username String @unique
+  password String @db.Text
+  createAt DateTime @default(now()) @map(name: "create_at")
+  updateAt DateTime @default(now()) @map(name: "update_at")
+  @@map(name: "user")
+}
