@@ -49,10 +49,10 @@ img {
   border-right: 1px solid #ddd;
 }
 
-.animation[animation="0"] {
+.animation_0 {
   animation: none;
 }
-.animation[animation="1"] {
+.animation_1 {
   animation: left 0.5s;
 }
 

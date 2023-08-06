@@ -41,8 +41,7 @@ export default function Main({ children }: { children: React.ReactNode }) {
       <Layout className="site-layout" style={{ backgroundColor: "#fff" }}>
         <MainHeader activeMenu={activeMenu} />
         <Content
-          className="animation"
-          animation={i}
+          className={"animation" + "_" + i}
           style={{ padding: "24px", overflow: "auto" }}
         >
           {children}
