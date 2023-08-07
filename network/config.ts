@@ -1,3 +1,4 @@
+"use client";
 import axios, { AxiosInstance } from "axios";
 import { notification } from "antd";
 
@@ -11,7 +12,7 @@ export default function request(config: any) {
   instance.interceptors.request.use(
     (config) => {
       // 判断有没有token
-      let token = window.localStorage.getItem("blog_token");
+      let token = localStorage.getItem("blog_token");
       if (token) config.headers.Authorization = token;
 
       return config;
@@ -33,8 +34,8 @@ export default function request(config: any) {
           duration: 1.5,
           description: response.data.msg,
           onClose: () => {
-            window.localStorage.removeItem("blog_token");
-            window.location.replace(window.location.origin + "/login");
+            localStorage.removeItem("blog_token");
+            location.replace(location.origin + "/login");
           },
         });
       }

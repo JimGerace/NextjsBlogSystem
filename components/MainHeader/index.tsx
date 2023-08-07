@@ -16,13 +16,13 @@ export default function MainHeader({ activeMenu }: Prop) {
   const [username, setUsername] = useState<string | null>("");
 
   useEffect(() => {
-    let user: string | null = window.localStorage.getItem("blog_user");
+    let user: string | null = localStorage.getItem("blog_user");
     setUsername(user);
   }, []);
 
   // 退出登录
   const layoutInfo = () => {
-    window.localStorage.clear();
+    localStorage.clear();
     router.replace("/login");
   };
 
