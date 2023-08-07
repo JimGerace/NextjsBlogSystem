@@ -12,8 +12,10 @@ export default function request(config: any) {
   instance.interceptors.request.use(
     (config) => {
       // 判断有没有token
-      let token = localStorage.getItem("blog_token");
-      if (token) config.headers.Authorization = token;
+      if (typeof window !== "undefined") {
+        let token = window.localStorage.getItem("blog_token");
+        if (token) config.headers.Authorization = token;
+      }
 
       return config;
     },
@@ -34,8 +36,10 @@ export default function request(config: any) {
           duration: 1.5,
           description: response.data.msg,
           onClose: () => {
-            localStorage.removeItem("blog_token");
-            location.replace(location.origin + "/login");
+            if (typeof window !== "undefined") {
+              window.localStorage.removeItem("blog_token");
+              window.location.replace(window.location.origin + "/login");
+            }
           },
         });
       }
