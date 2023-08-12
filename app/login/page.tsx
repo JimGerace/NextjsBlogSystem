@@ -5,6 +5,7 @@ import { Input, Button, Spin } from "antd";
 import { useRouter } from "next/navigation";
 import { TipToast, RSAEncrypt } from "@/utils/tools";
 import { loginIn } from "@/network/index";
+import { setCookie } from "nookies";
 
 export default function Login() {
   const router = useRouter();
@@ -31,7 +32,12 @@ export default function Login() {
         if (res.code == 200) {
           TipToast(res.msg, "success");
           window.localStorage.setItem("blog_user", username);
-          window.localStorage.setItem("blog_token", res.token);
+
+          setCookie(null, "client_token", res.token, {
+            maxAge: 60 * 60 * 24,
+            path: "/",
+          });
+
           router.push("/main/article");
         } else {
           TipToast(res.msg);

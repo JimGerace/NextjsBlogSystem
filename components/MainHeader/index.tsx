@@ -30,9 +30,6 @@ export default function MainHeader({ activeMenu }: Prop) {
     {
       key: "1",
       label: <span onClick={layoutInfo}>退出登录</span>,
-      onTitleClick: () => {
-        console.log("123");
-      },
     },
   ];
 

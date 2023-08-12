@@ -5,6 +5,7 @@ import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { Input, Button, Table, Tag, Switch, Modal, Spin } from "antd";
 import AddArticle from "@/components/AddArticle";
 import { formDate, TipToast } from "@/utils/tools";
+import { useRouter } from "next/navigation";
 import { ArticleList, ArticleDetail, DelArticle } from "@/network/index";
 
 const { Search } = Input;
@@ -12,6 +13,7 @@ const { Column } = Table;
 const { confirm } = Modal;
 
 export default function Article() {
+  const router = useRouter();
   const [pageType, setPageType] = useState<string>("");
   const [isAdd, setIsAdd] = useState<boolean>(false);
   const [query, setQuery] = useState<string>("");
@@ -43,8 +45,14 @@ export default function Article() {
             };
           });
           setTableData(list);
-        } else {
+        } else if (res.code == 400) {
           setTableData([]);
+          TipToast(res.msg || "网络异常，请稍后再试");
+        } else {
+          TipToast(res.msg, "error", () => {
+            router.replace("/login");
+            window.history.pushState(null, "", document.URL);
+          });
         }
       })
       .finally(() => {
@@ -96,8 +104,13 @@ export default function Article() {
         if (res.code == 200) {
           setArticleInfo(res.data);
           setIsAdd(true);
-        } else {
+        } else if (res.code == 400) {
           TipToast(res.msg || "网络异常，请稍后再试");
+        } else {
+          TipToast(res.msg, "error", () => {
+            router.replace("/login");
+            window.history.pushState(null, "", document.URL);
+          });
         }
       })
       .finally(() => {
@@ -113,8 +126,13 @@ export default function Article() {
         if (res.code == 200) {
           TipToast(res.msg, "success");
           getArticleList(query);
-        } else {
+        } else if (res.code == 400) {
           TipToast(res.msg);
+        } else {
+          TipToast(res.msg, "error", () => {
+            router.replace("/login");
+            window.history.pushState(null, "", document.URL);
+          });
         }
       })
       .finally(() => {

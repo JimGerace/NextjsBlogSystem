@@ -42,6 +42,7 @@ export function RSAEncrypt(word: string) {
 export const TipToast = (
   description: string,
   type: string = "error",
+  callback: Function = function () {},
   duration: number = 2,
   message: string = "提示"
 ) => {
@@ -51,6 +52,9 @@ export const TipToast = (
         message,
         duration,
         description,
+        onClose: () => {
+          callback && callback();
+        },
       });
       break;
     }
@@ -59,6 +63,9 @@ export const TipToast = (
         message,
         duration,
         description,
+        onClose: () => {
+          callback && callback();
+        },
       });
       break;
     }
@@ -67,6 +74,9 @@ export const TipToast = (
         message,
         duration,
         description,
+        onClose: () => {
+          callback && callback();
+        },
       });
       break;
     }

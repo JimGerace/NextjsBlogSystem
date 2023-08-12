@@ -1,6 +1,6 @@
-"use client";
 import axios, { AxiosInstance } from "axios";
 import { notification } from "antd";
+import { parseCookies } from "nookies";
 
 export default function request(config: any) {
   const instance: AxiosInstance = axios.create({
@@ -11,12 +11,8 @@ export default function request(config: any) {
 
   instance.interceptors.request.use(
     (config) => {
-      // 判断有没有token
-      if (typeof window !== "undefined") {
-        let token = window.localStorage.getItem("blog_token");
-        if (token) config.headers.Authorization = token;
-      }
-
+      let { client_token } = parseCookies();
+      if (client_token) config.headers.Authorization = client_token;
       return config;
     },
     (error) => {
@@ -30,19 +26,6 @@ export default function request(config: any) {
 
   instance.interceptors.response.use(
     (response) => {
-      if (response.data.code == 401) {
-        notification.error({
-          message: "提示",
-          duration: 1.5,
-          description: response.data.msg,
-          onClose: () => {
-            if (typeof window !== "undefined") {
-              window.localStorage.removeItem("blog_token");
-              window.location.replace(window.location.origin + "/login");
-            }
-          },
-        });
-      }
       return response.data;
     },
     (error) => {

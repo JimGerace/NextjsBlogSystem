@@ -5,6 +5,7 @@ import { Button, Form, Input, Select, Switch, Spin, Modal, Image } from "antd";
 import Editor from "for-editor";
 import { ArticleSort, UpdateArticle } from "@/network/index";
 import { TipToast } from "@/utils/tools";
+import { useRouter } from "next/navigation";
 
 interface Prop {
   close: Function;
@@ -43,6 +44,7 @@ const detailToolBar = {
 };
 
 function AddArticle({ close, articleInfo, pageType }: Prop) {
+  const router = useRouter();
   const FormRef = useRef(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -137,8 +139,13 @@ function AddArticle({ close, articleInfo, pageType }: Prop) {
         if (res.code == 200) {
           TipToast(res.msg, "success");
           closeModal(true);
-        } else {
+        } else if (res.code == 400) {
           TipToast(res.msg);
+        } else {
+          TipToast(res.msg, "error", () => {
+            router.replace("/login");
+            window.history.pushState(null, "", document.URL);
+          });
         }
       })
       .finally(() => {
