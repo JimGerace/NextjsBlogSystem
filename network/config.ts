@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { notification } from "antd";
-import { parseCookies } from "nookies";
+import { parseCookies, destroyCookie } from "nookies";
 
 export default function request(config: any) {
   const instance: AxiosInstance = axios.create({
@@ -26,6 +26,19 @@ export default function request(config: any) {
 
   instance.interceptors.response.use(
     (response) => {
+      if (response.data.code == 401) {
+        notification.error({
+          message: "提示",
+          duration: 1.5,
+          description: response.data.msg,
+          onClose: () => {
+            destroyCookie(null, "client_token");
+            destroyCookie(null, "user_name");
+            window.location.replace(window.location.origin + "/login");
+            window.history.pushState(null, "", document.URL);
+          },
+        });
+      }
       return response.data;
     },
     (error) => {

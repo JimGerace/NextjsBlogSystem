@@ -46,13 +46,9 @@ function Article() {
             };
           });
           setTableData(list);
-        } else if (res.code == 400) {
+        } else {
           setTableData([]);
           TipToast(res.msg || "网络异常，请稍后再试");
-        } else {
-          TipToast(res.msg, "error", () => {
-            router.replace("/login");
-          });
         }
       })
       .finally(() => {
@@ -104,12 +100,8 @@ function Article() {
         if (res.code == 200) {
           setArticleInfo(res.data);
           setIsAdd(true);
-        } else if (res.code == 400) {
-          TipToast(res.msg || "网络异常，请稍后再试");
         } else {
-          TipToast(res.msg, "error", () => {
-            router.replace("/login");
-          });
+          TipToast(res.msg || "网络异常，请稍后再试");
         }
       })
       .finally(() => {
@@ -125,12 +117,8 @@ function Article() {
         if (res.code == 200) {
           TipToast(res.msg, "success");
           getArticleList(query);
-        } else if (res.code == 400) {
-          TipToast(res.msg);
         } else {
-          TipToast(res.msg, "error", () => {
-            router.replace("/login");
-          });
+          TipToast(res.msg);
         }
       })
       .finally(() => {

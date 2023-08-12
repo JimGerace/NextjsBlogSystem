@@ -13,6 +13,7 @@ const nextConfig = {
   images: {
     domains: ["gitee.com"],
   },
+  pageExtensions: ["page.ts", "page.tsx", "index.tsx", "index.ts", "config.ts"],
 };
 
 module.exports = nextConfig;
