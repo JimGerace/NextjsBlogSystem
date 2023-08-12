@@ -89,7 +89,7 @@ function AddArticle({ close, articleInfo, pageType }: Prop) {
   };
 
   // 获取文章种类列表
-  const getSortList = async () => {
+  const getSortList = () => {
     setLoading(true);
     ArticleSort()
       .then((res: any) => {
@@ -123,7 +123,7 @@ function AddArticle({ close, articleInfo, pageType }: Prop) {
   };
 
   // 添加/编辑文章接口
-  const articleInterFace = async () => {
+  const articleInterFace = () => {
     setLoading(true);
     const data = {
       id,

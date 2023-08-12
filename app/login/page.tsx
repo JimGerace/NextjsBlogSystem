@@ -7,14 +7,14 @@ import { TipToast, RSAEncrypt } from "@/utils/tools";
 import { loginIn } from "@/network/index";
 import { setCookie } from "nookies";
 
-export default function Login() {
+function Login() {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   // 点击sign up按钮
-  const submitInfo = async () => {
+  const submitInfo = () => {
     if (!username) {
       TipToast("Please enter your account", "warning");
       return;
@@ -91,3 +91,12 @@ export default function Login() {
     </Spin>
   );
 }
+
+export async function getServerSideProps() {
+  return {
+    // 通过返回一个空对象，关闭该页面的 SSR
+    props: {},
+  };
+}
+
+export default Login;

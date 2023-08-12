@@ -12,7 +12,7 @@ const { Search } = Input;
 const { Column } = Table;
 const { confirm } = Modal;
 
-export default function Article() {
+function Article() {
   const router = useRouter();
   const [pageType, setPageType] = useState<string>("");
   const [isAdd, setIsAdd] = useState<boolean>(false);
@@ -26,7 +26,7 @@ export default function Article() {
   }, []);
 
   // 获取文章列表
-  const getArticleList = async (query: string) => {
+  const getArticleList = (query: string) => {
     setIsLoading(true);
     ArticleList({
       type: "many",
@@ -92,7 +92,7 @@ export default function Article() {
   };
 
   // 点击编辑 / 详情按钮
-  const toViewInfo = async (id: string, type: string) => {
+  const toViewInfo = (id: string, type: string) => {
     setPageType(type);
     setIsLoading(true);
     ArticleDetail({
@@ -117,7 +117,7 @@ export default function Article() {
   };
 
   // 删除接口
-  const deleteArticle = async (id: string) => {
+  const deleteArticle = (id: string) => {
     setIsLoading(true);
     DelArticle({ id })
       .then((res: any) => {
@@ -253,3 +253,12 @@ export default function Article() {
     </div>
   );
 }
+
+export async function getServerSideProps() {
+  return {
+    // 通过返回一个空对象，关闭该页面的 SSR
+    props: {},
+  };
+}
+
+export default Article;

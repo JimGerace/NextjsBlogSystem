@@ -6,13 +6,13 @@ import { useState } from "react";
 import { TipToast, RSAEncrypt } from "@/utils/tools";
 import { RegisterIn } from "@/network/index";
 
-export default function Register() {
+function Register() {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const toRegister = async () => {
+  const toRegister = () => {
     if (!username) {
       TipToast("Please enter your account", "warning");
       return;
@@ -80,3 +80,12 @@ export default function Register() {
     </Spin>
   );
 }
+
+export async function getServerSideProps() {
+  return {
+    // 通过返回一个空对象，关闭该页面的 SSR
+    props: {},
+  };
+}
+
+export default Register;
