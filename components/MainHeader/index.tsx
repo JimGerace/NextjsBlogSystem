@@ -6,7 +6,7 @@ import { Dropdown, Space } from "antd";
 import type { MenuProps } from "antd";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { destroyCookie } from "nookies";
+import { destroyCookie, parseCookies } from "nookies";
 
 interface Prop {
   activeMenu: string;
@@ -17,15 +17,15 @@ export default function MainHeader({ activeMenu }: Prop) {
   const [username, setUsername] = useState<string | null>("");
 
   useEffect(() => {
-    let user: string | null = localStorage.getItem("blog_user");
-    setUsername(user);
+    let { user_name } = parseCookies();
+    setUsername(user_name);
   }, []);
 
   // 退出登录
   const layoutInfo = () => {
-    localStorage.clear();
     router.replace("/login");
     destroyCookie(null, "client_token");
+    destroyCookie(null, "user_name");
   };
 
   const items: MenuProps["items"] = [

@@ -51,7 +51,6 @@ export default function Article() {
         } else {
           TipToast(res.msg, "error", () => {
             router.replace("/login");
-            history.pushState(null, "", document.URL);
           });
         }
       })
@@ -109,7 +108,6 @@ export default function Article() {
         } else {
           TipToast(res.msg, "error", () => {
             router.replace("/login");
-            history.pushState(null, "", document.URL);
           });
         }
       })
@@ -131,7 +129,6 @@ export default function Article() {
         } else {
           TipToast(res.msg, "error", () => {
             router.replace("/login");
-            history.pushState(null, "", document.URL);
           });
         }
       })

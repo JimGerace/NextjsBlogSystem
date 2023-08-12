@@ -144,7 +144,6 @@ function AddArticle({ close, articleInfo, pageType }: Prop) {
         } else {
           TipToast(res.msg, "error", () => {
             router.replace("/login");
-            history.pushState(null, "", document.URL);
           });
         }
       })
