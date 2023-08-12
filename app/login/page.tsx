@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { TipToast, RSAEncrypt } from "@/utils/tools";
 import { loginIn } from "@/network/index";
 import { setCookie } from "nookies";
+import dynamic from "next/dynamic";
 
 function Login() {
   const router = useRouter();
@@ -92,11 +93,6 @@ function Login() {
   );
 }
 
-export async function getServerSideProps() {
-  return {
-    // 通过返回一个空对象，关闭该页面的 SSR
-    props: {},
-  };
-}
-
-export default Login;
+export default dynamic(() => Promise.resolve(Login), {
+  ssr: false,
+});

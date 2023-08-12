@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { TipToast, RSAEncrypt } from "@/utils/tools";
 import { RegisterIn } from "@/network/index";
+import dynamic from "next/dynamic";
 
 function Register() {
   const router = useRouter();
@@ -81,11 +82,6 @@ function Register() {
   );
 }
 
-export async function getServerSideProps() {
-  return {
-    // 通过返回一个空对象，关闭该页面的 SSR
-    props: {},
-  };
-}
-
-export default Register;
+export default dynamic(() => Promise.resolve(Register), {
+  ssr: false,
+});

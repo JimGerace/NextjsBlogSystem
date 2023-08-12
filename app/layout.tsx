@@ -8,11 +8,7 @@ export const metadata = {
 
 export const revalidate = 60 * 60;
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body>{children}</body>
@@ -20,3 +16,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+export default RootLayout;

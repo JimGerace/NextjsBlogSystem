@@ -7,6 +7,7 @@ import AddArticle from "@/components/AddArticle";
 import { formDate, TipToast } from "@/utils/tools";
 import { useRouter } from "next/navigation";
 import { ArticleList, ArticleDetail, DelArticle } from "@/network/index";
+import dynamic from "next/dynamic";
 
 const { Search } = Input;
 const { Column } = Table;
@@ -254,11 +255,6 @@ function Article() {
   );
 }
 
-export async function getServerSideProps() {
-  return {
-    // 通过返回一个空对象，关闭该页面的 SSR
-    props: {},
-  };
-}
-
-export default Article;
+export default dynamic(() => Promise.resolve(Article), {
+  ssr: false,
+});
