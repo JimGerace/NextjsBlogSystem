@@ -51,7 +51,7 @@ export default function Article() {
         } else {
           TipToast(res.msg, "error", () => {
             router.replace("/login");
-            window.history.pushState(null, "", document.URL);
+            history.pushState(null, "", document.URL);
           });
         }
       })
@@ -109,7 +109,7 @@ export default function Article() {
         } else {
           TipToast(res.msg, "error", () => {
             router.replace("/login");
-            window.history.pushState(null, "", document.URL);
+            history.pushState(null, "", document.URL);
           });
         }
       })
@@ -131,7 +131,7 @@ export default function Article() {
         } else {
           TipToast(res.msg, "error", () => {
             router.replace("/login");
-            window.history.pushState(null, "", document.URL);
+            history.pushState(null, "", document.URL);
           });
         }
       })

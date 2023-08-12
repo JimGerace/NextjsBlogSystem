@@ -31,7 +31,7 @@ export default function Login() {
       .then((res: any) => {
         if (res.code == 200) {
           TipToast(res.msg, "success");
-          window.localStorage.setItem("blog_user", username);
+          localStorage.setItem("blog_user", username);
 
           setCookie(null, "client_token", res.token, {
             maxAge: 60 * 60 * 24,

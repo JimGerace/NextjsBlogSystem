@@ -6,6 +6,7 @@ import { Dropdown, Space } from "antd";
 import type { MenuProps } from "antd";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { destroyCookie } from "nookies";
 
 interface Prop {
   activeMenu: string;
@@ -24,6 +25,7 @@ export default function MainHeader({ activeMenu }: Prop) {
   const layoutInfo = () => {
     localStorage.clear();
     router.replace("/login");
+    destroyCookie(null, "client_token");
   };
 
   const items: MenuProps["items"] = [
