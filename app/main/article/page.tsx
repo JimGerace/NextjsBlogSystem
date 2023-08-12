@@ -3,11 +3,15 @@ import "./article.scss";
 import { useCallback, useEffect, useState } from "react";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { Input, Button, Table, Tag, Switch, Modal, Spin } from "antd";
-import AddArticle from "@/components/AddArticle";
+// import AddArticle from "@/components/AddArticle";
 import { formDate, TipToast } from "@/utils/tools";
 import { useRouter } from "next/navigation";
 import { ArticleList, ArticleDetail, DelArticle } from "@/network/index";
 import dynamic from "next/dynamic";
+
+const ADDComponent = dynamic(() => import("@/components/AddArticle"), {
+  ssr: false,
+});
 
 const { Search } = Input;
 const { Column } = Table;
@@ -46,9 +50,11 @@ function Article() {
             };
           });
           setTableData(list);
-        } else {
+        } else if (res.code == 400) {
           setTableData([]);
           TipToast(res.msg || "网络异常，请稍后再试");
+        } else {
+          router.replace("/login");
         }
       })
       .finally(() => {
@@ -100,8 +106,10 @@ function Article() {
         if (res.code == 200) {
           setArticleInfo(res.data);
           setIsAdd(true);
-        } else {
+        } else if (res.code == 400) {
           TipToast(res.msg || "网络异常，请稍后再试");
+        } else {
+          router.replace("/login");
         }
       })
       .finally(() => {
@@ -117,8 +125,10 @@ function Article() {
         if (res.code == 200) {
           TipToast(res.msg, "success");
           getArticleList(query);
-        } else {
+        } else if (res.code == 400) {
           TipToast(res.msg);
+        } else {
+          router.replace("/login");
         }
       })
       .finally(() => {
@@ -231,7 +241,7 @@ function Article() {
       </div>
 
       {isAdd ? (
-        <AddArticle
+        <ADDComponent
           close={closeModal}
           articleInfo={articleInfo}
           pageType={pageType}

@@ -2,16 +2,26 @@
 import "./index.scss";
 import { Input, Button, Spin } from "antd";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { TipToast, RSAEncrypt } from "@/utils/tools";
+import { useEffect, useState } from "react";
+import { TipToast } from "@/utils/tools";
 import { RegisterIn } from "@/network/index";
-import dynamic from "next/dynamic";
+import { publicKey } from "@/utils/config";
 
 function Register() {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [jsEncrypt, setJsEncrypt] = useState<any>(null);
+
+  useEffect(() => {
+    import("jsencrypt").then((module) => {
+      const JSEncrypt = module.default;
+      let instance = new JSEncrypt();
+      instance.setPublicKey(publicKey);
+      setJsEncrypt(instance);
+    });
+  }, []);
 
   const toRegister = () => {
     if (!username) {
@@ -25,7 +35,7 @@ function Register() {
     setLoading(true);
     RegisterIn({
       username,
-      password: RSAEncrypt(password),
+      password: jsEncrypt.encrypt(password),
     })
       .then((res: any) => {
         if (res.code == 200) {
@@ -82,6 +92,4 @@ function Register() {
   );
 }
 
-export default dynamic(() => Promise.resolve(Register), {
-  ssr: false,
-});
+export default Register;

@@ -139,8 +139,10 @@ function AddArticle({ close, articleInfo, pageType }: Prop) {
         if (res.code == 200) {
           TipToast(res.msg, "success");
           closeModal(true);
-        } else {
+        } else if (res.code == 400) {
           TipToast(res.msg);
+        } else {
+          router.replace("/login");
         }
       })
       .finally(() => {

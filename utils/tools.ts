@@ -1,6 +1,4 @@
 import { notification } from "antd";
-import JSEncrypt from "jsencrypt";
-import { publicKey } from "./config";
 
 // 格式化时间日期
 export function formDate(time: string, type: string) {
@@ -29,13 +27,6 @@ export function formDate(time: string, type: string) {
       return `${year}-${month}-${day}`;
     }
   }
-}
-
-// RSA -- 加密
-export function RSAEncrypt(word: string) {
-  const encrypt = new JSEncrypt();
-  encrypt.setPublicKey(publicKey);
-  return encrypt.encrypt(word);
 }
 
 // 提示框

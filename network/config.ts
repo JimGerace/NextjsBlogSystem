@@ -34,8 +34,6 @@ export default function request(config: any) {
           onClose: () => {
             destroyCookie(null, "client_token");
             destroyCookie(null, "user_name");
-            window.location.replace(window.location.origin + "/login");
-            window.history.pushState(null, "", document.URL);
           },
         });
       }
