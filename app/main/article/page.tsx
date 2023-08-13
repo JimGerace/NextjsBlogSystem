@@ -3,7 +3,6 @@ import "./article.scss";
 import { useCallback, useEffect, useState } from "react";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { Input, Button, Table, Tag, Switch, Modal, Spin } from "antd";
-// import AddArticle from "@/components/AddArticle";
 import { formDate, TipToast } from "@/utils/tools";
 import { useRouter } from "next/navigation";
 import { ArticleList, ArticleDetail, DelArticle } from "@/network/index";
@@ -39,7 +38,7 @@ function Article() {
     })
       .then((res: any) => {
         if (res.code == 200) {
-          let list = res.data.map((item: any) => {
+          let list = res.data.map((item: any, index: number) => {
             return {
               ...item,
               createAt: formDate(item.createAt, "yyyy-mm-dd hh:mm:ss"),
@@ -47,6 +46,7 @@ function Article() {
               sort: item.sort.includes(",")
                 ? item.sort.split(",")
                 : [item.sort],
+              key: index,
             };
           });
           setTableData(list);

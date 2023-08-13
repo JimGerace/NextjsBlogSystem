@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { TipToast } from "@/utils/tools";
 import { RegisterIn } from "@/network/index";
 import { publicKey } from "@/utils/config";
+import Link from "next/link";
 
 function Register() {
   const router = useRouter();
@@ -83,9 +84,9 @@ function Register() {
             </Button>
           </div>
 
-          <span className="register_des" onClick={toLoginPage}>
+          <Link className="register_des" href={"/login"}>
             Already have an account? Sign in instead.
-          </span>
+          </Link>
         </div>
       </div>
     </Spin>

@@ -1,9 +1,14 @@
 "use client";
-import MainMenu from "@/components/MainMenu";
-import MainHeader from "@/components/MainHeader";
 import { Layout } from "antd";
 import { useCallback, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import dynamic from "next/dynamic";
+const MainMenu = dynamic(() => import("../../components/MainMenu"), {
+  ssr: false,
+});
+const MainHeader = dynamic(() => import("../../components/MainHeader"), {
+  ssr: false,
+});
 
 const { Content, Sider } = Layout;
 

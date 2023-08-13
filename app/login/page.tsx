@@ -3,6 +3,7 @@ import "./index.scss";
 import { useEffect, useState } from "react";
 import { Input, Button, Spin } from "antd";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { TipToast } from "@/utils/tools";
 import { loginIn } from "@/network/index";
 import { setCookie } from "nookies";
@@ -58,11 +59,6 @@ function Login() {
       });
   };
 
-  // 跳转到注册页面
-  const toRegisterPage = () => {
-    router.push("/register");
-  };
-
   return (
     <Spin size="large" spinning={loading}>
       <div className="login_page">
@@ -94,9 +90,9 @@ function Login() {
             </Button>
           </div>
 
-          <span className="login_des" onClick={toRegisterPage}>
+          <Link href="/register" className="login_des">
             Don't have an account? Sign Up
-          </span>
+          </Link>
         </div>
       </div>
     </Spin>

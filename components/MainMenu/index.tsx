@@ -2,10 +2,11 @@
 import "./index.scss";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
+import Link from "next/link";
 
 import { GitlabOutlined, HighlightOutlined } from "@ant-design/icons";
 import { useEffect, useState, memo } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -35,8 +36,16 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem("文章", "article", <HighlightOutlined />),
-  getItem("关于我", "about", <GitlabOutlined />),
+  getItem(
+    <Link href={"/main/article"}>文章</Link>,
+    "article",
+    <HighlightOutlined />
+  ),
+  getItem(
+    <Link href={"/main/about"}>关于我</Link>,
+    "about",
+    <GitlabOutlined />
+  ),
 ];
 
 const articleEnum: Article = {
@@ -46,7 +55,6 @@ const articleEnum: Article = {
 
 function MainMenu({ collapsed, changeActiveMenu }: Prop) {
   const pathName = usePathname();
-  const router = useRouter();
   const [selectKey, setSelectKey] = useState<string>("");
 
   useEffect(() => {
@@ -60,7 +68,7 @@ function MainMenu({ collapsed, changeActiveMenu }: Prop) {
     const { key } = row;
     setSelectKey(key);
     changeActiveMenu((articleEnum as any)[key]);
-    router.push(`/main/${key}`);
+    // router.push(`/main/${key}`);
   };
 
   return (
