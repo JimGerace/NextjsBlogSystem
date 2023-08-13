@@ -77,7 +77,7 @@ function Article() {
       setIsAdd(false);
       setPageType("");
       setArticleInfo(null);
-      val && getArticleList(query);
+      val && getArticleList();
     },
     [isAdd]
   );
