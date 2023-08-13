@@ -77,7 +77,7 @@ function Article() {
       setIsAdd(false);
       setPageType("");
       setArticleInfo(null);
-      val && getArticleList(query);
+      val && getArticleList();
     },
     [isAdd]
   );
@@ -127,7 +127,7 @@ function Article() {
       .then((res: any) => {
         if (res.code == 200) {
           TipToast(res.msg, "success");
-          getArticleList(query);
+          getArticleList();
         } else if (res.code == 400) {
           TipToast(res.msg);
         } else {
