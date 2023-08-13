@@ -18,6 +18,8 @@ const { confirm } = Modal;
 
 function Article() {
   const router = useRouter();
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [total, setTotal] = useState<number>(0);
   const [pageType, setPageType] = useState<string>("");
   const [isAdd, setIsAdd] = useState<boolean>(false);
   const [query, setQuery] = useState<string>("");
@@ -26,15 +28,16 @@ function Article() {
   const [articleInfo, setArticleInfo] = useState<Object | null>(null);
 
   useEffect(() => {
-    getArticleList("");
-  }, []);
+    getArticleList();
+  }, [query, currentPage]);
 
   // 获取文章列表
-  const getArticleList = (query: string) => {
+  const getArticleList = () => {
     setIsLoading(true);
     ArticleList({
       type: "many",
       name: query,
+      page: currentPage,
     })
       .then((res: any) => {
         if (res.code == 200) {
@@ -49,6 +52,7 @@ function Article() {
               key: index,
             };
           });
+          setTotal(res.total);
           setTableData(list);
         } else if (res.code == 400) {
           setTableData([]);
@@ -65,7 +69,6 @@ function Article() {
   // 点击搜索按钮
   const onSearch = (val: string) => {
     setQuery(val);
-    getArticleList(val);
   };
 
   // 关闭对话框
@@ -136,6 +139,11 @@ function Article() {
       });
   };
 
+  // 翻页
+  const onPageChange = (val: any) => {
+    setCurrentPage(val);
+  };
+
   return (
     <div className="article_page">
       <div className="search_box">
@@ -159,7 +167,11 @@ function Article() {
 
       <div className="table_box">
         <Spin size="large" spinning={isLoading}>
-          <Table dataSource={tableData} bordered>
+          <Table
+            dataSource={tableData}
+            bordered
+            pagination={{ onChange: onPageChange, pageSize: 10, total }}
+          >
             <Column
               align="center"
               title="文章名称"

@@ -12,8 +12,10 @@ interface Param {
   status?: boolean;
 }
 
-async function getArticleMany(name: string) {
+async function getArticleMany(name: string, page: number) {
   const result = await prisma.articleList.findMany({
+    skip: page - 1,
+    take: 10,
     select: {
       id: true,
       name: true,
@@ -26,6 +28,9 @@ async function getArticleMany(name: string) {
       name: {
         contains: name,
       },
+    },
+    orderBy: {
+      createAt: "desc",
     },
   });
   return result;
@@ -123,21 +128,25 @@ export async function GET(req: NextRequest) {
   }
 
   let name: string = req.nextUrl.searchParams.get("name") || "";
+  let page: number = Number(req.nextUrl.searchParams.get("page")) || 1;
   let id: string = req.nextUrl.searchParams.get("id") || "";
   let type: string = req.nextUrl.searchParams.get("type") || "";
 
+  const total: number = await prisma.articleList.count();
   switch (type) {
     case "many": {
-      const result = await getArticleMany(name);
+      const result = await getArticleMany(name, page);
       return NextResponse.json({
         code: 200,
         data: result,
+        total: total,
       });
     }
     default: {
       const result: any = await getArticleUnique(id);
       return NextResponse.json({
         code: 200,
+        total: total,
         data: { ...result },
       });
     }
