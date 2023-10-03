@@ -28,6 +28,7 @@ model ArticleList{
   createAt DateTime @default(now()) @map(name: "create_at")
   updateAt DateTime @default(now()) @map(name: "update_at")
   content String @db.Text
+  yearly Int @default(2023)
   @@map(name: "article_list")
 }
 

@@ -10,6 +10,7 @@ interface Param {
   content: string;
   sort: string[];
   status?: boolean;
+  yearly?: number;
 }
 
 async function getArticleMany(name: string, page: number) {
@@ -54,7 +55,14 @@ async function getArticleUnique(id: string) {
   return result;
 }
 
-async function addArticle({ name, coverUrl, content, sort, status }: Param) {
+async function addArticle({
+  name,
+  coverUrl,
+  content,
+  sort,
+  status,
+  yearly,
+}: Param) {
   const article = await prisma.articleList.create({
     data: {
       name,
@@ -62,6 +70,7 @@ async function addArticle({ name, coverUrl, content, sort, status }: Param) {
       content,
       sort: sort.join(","),
       status,
+      yearly,
     },
   });
   return article;
@@ -182,12 +191,11 @@ export async function POST(ctx: NextRequest) {
 
   const tip: any = {
     name: "文章名称不能为空",
-    coverUrl: "文章封面不能为空",
     content: "文章内容不能为空",
     sort: "文章种类不能为空",
   };
 
-  for (let key in info) {
+  for (let key in tip) {
     if (!info[key]) {
       const data = {
         code: 400,
@@ -199,7 +207,14 @@ export async function POST(ctx: NextRequest) {
 
   switch (type) {
     case "edit": {
-      const param: Param = { id, name, coverUrl, sort, status, content };
+      const param: Param = {
+        id,
+        name,
+        coverUrl,
+        sort,
+        status,
+        content,
+      };
       const result = await updateArticle(param);
       if (result) {
         return NextResponse.json({
@@ -215,7 +230,14 @@ export async function POST(ctx: NextRequest) {
       }
     }
     case "add": {
-      const param: Param = { name, coverUrl, sort, status, content };
+      const param: Param = {
+        name,
+        coverUrl,
+        sort,
+        status,
+        content,
+        yearly: new Date().getFullYear(),
+      };
       const result = await addArticle(param);
 
       if (result) {

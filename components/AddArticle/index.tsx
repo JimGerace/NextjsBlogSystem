@@ -221,11 +221,7 @@ function AddArticle({ close, articleInfo, pageType }: Prop) {
               />
             </Form.Item>
 
-            <Form.Item
-              label="封面Url："
-              name="coverUrl"
-              rules={[{ required: true, message: "请输入文章封面图片地址" }]}
-            >
+            <Form.Item label="封面Url：" name="coverUrl">
               <div className="previewImg">
                 <Input
                   allowClear
